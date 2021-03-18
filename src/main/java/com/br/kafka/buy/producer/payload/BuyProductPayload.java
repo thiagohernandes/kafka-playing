@@ -11,6 +11,9 @@ public class BuyProductPayload {
     @JsonProperty("quantity")
     private Integer quantity;
 
+    public BuyProductPayload() {
+    }
+
     public BuyProductPayload(Integer id, String description, Integer quantity) {
         this.id = id;
         this.description = description;

@@ -5,7 +5,7 @@ import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BasicExceptionHandler {
+public class CommonExceptionHandler {
 
     public void handleExceptionKafka(Logger logger, String className, Exception e){
         if (e instanceof KafkaException) {

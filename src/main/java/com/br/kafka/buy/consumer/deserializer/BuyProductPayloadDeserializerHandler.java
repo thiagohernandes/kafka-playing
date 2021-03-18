@@ -2,15 +2,15 @@ package com.br.kafka.buy.consumer.deserializer;
 
 import com.br.kafka.buy.producer.payload.BuyProductPayload;
 
-public class BuyProductPayloadDeserializerError {
+public class BuyProductPayloadDeserializerHandler {
 
     private final BuyProductPayload productPayload;
     private final Throwable error;
     private String encodedValue;
 
-    public BuyProductPayloadDeserializerError(BuyProductPayload productPayload,
-                                              Throwable error,
-                                              String encodedValue){
+    public BuyProductPayloadDeserializerHandler(BuyProductPayload productPayload,
+                                                Throwable error,
+                                                String encodedValue){
         this.productPayload = productPayload;
         this.error = error;
         this.encodedValue = encodedValue;
@@ -30,10 +30,6 @@ public class BuyProductPayloadDeserializerError {
 
     @Override
     public String toString() {
-        return "BuyProductPayloadDeserializerError{" +
-                "productPayload=" + productPayload +
-                ", error=" + error +
-                ", encodedValue='" + encodedValue + '\'' +
-                '}';
+        return encodedValue;
     }
 }
