@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import java.util.Map;
+import java.util.Objects;
 
 @Configuration
 public class BuyProducer {
@@ -35,7 +36,12 @@ public class BuyProducer {
         LOGGER.info("[BuyProducer] Iniciando processo de compra de produto...");
         try (var sender = new BuyDirectProductSender(CONFIG, TOPICO_COMPRA)) {
             BuyProductDto product = BuyProductDatabase.findProductById(1);
-            BuyProductDatabase.sellProduct(product, 3);
+            if (!Objects.isNull(product)) {
+                if (product.getQuantity() <= 0) {
+                    throw new Exception("[BuyProducer] Estoque baixo!");
+                }
+            }
+            BuyProductDatabase.sellProduct(product, 2);
             sender.send(new BuyProductPayload(product.getId(), product.getDescription(),
                     product.getQuantity()));
             LOGGER.info("[BuyProducer] Produto {} enviado com sucesso!", product.toString());
